@@ -1,0 +1,25 @@
+name: Test
+
+on: push
+
+jobs:
+  test-go:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22.3
+
+      - name: Clone parser repo
+        uses: actions/checkout@v4
+
+      - name: Clone config repo
+        uses: actions/checkout@v4
+        with:
+          repository: csunibo/config
+          ref: main
+          path: config
+
+      - name: Run go tests
+        run: go test -v ./...
