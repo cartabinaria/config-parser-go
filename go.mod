@@ -1,3 +1,3 @@
-module github.com/csunibo/config-parsing-go
+module github.com/csunibo/config-parser-go
 
 go 1.22.3
