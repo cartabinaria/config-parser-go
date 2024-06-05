@@ -181,3 +181,21 @@ func ParseRepresentatives(configPath string) (map[string]Representative, error) 
 
 	return representatives, nil
 }
+
+func GetAllMandatoryTeachingsFromDegree(d Degree) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if i.Mandatory {
+			dt = append(dt, i)
+		}
+	}
+	return
+}
+
+func GetAllElectivesTeachingsFromDegree(d Degree) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if !i.Mandatory {
+			dt = append(dt, i)
+		}
+	}
+	return
+}
