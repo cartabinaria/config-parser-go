@@ -42,7 +42,7 @@ type Year struct {
 // This is temporary, i think we can join Teachins and Degrees
 type DegreeTeaching struct {
 	Name      string `json:"name"`
-	Year      int    `json:"year"`
+	Year      int64  `json:"year"`
 	Mandatory bool   `json:"mandatory"`
 }
 
@@ -194,6 +194,24 @@ func GetAllMandatoryTeachingsFromDegree(d Degree) (dt []DegreeTeaching) {
 func GetAllElectivesTeachingsFromDegree(d Degree) (dt []DegreeTeaching) {
 	for _, i := range d.Teachings {
 		if !i.Mandatory {
+			dt = append(dt, i)
+		}
+	}
+	return
+}
+
+func GetYearMandatoryTeachingsFromDegree(d Degree, year int64) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if i.Mandatory && i.Year == year {
+			dt = append(dt, i)
+		}
+	}
+	return
+}
+
+func GetYearElectivesTeachingsFromDegree(d Degree, year int64) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if !i.Mandatory && i.Year == year {
 			dt = append(dt, i)
 		}
 	}
