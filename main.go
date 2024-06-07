@@ -34,23 +34,25 @@ type Teaching struct {
 
 // config/degrees.json
 
-type YearStudyDiagram struct {
-	Mandatory []string `json:"mandatory"`
-	Electives []string `json:"electives"`
+type Year struct {
+	Year int64  `json:"year"`
+	Chat string `json:"chat"`
 }
 
-type Year struct {
-	Year      int64            `json:"year"`
-	Chat      string           `json:"chat"`
-	Teachings YearStudyDiagram `json:"teachings"`
+// This is temporary, i think we can join Teachins and Degrees
+type DegreeTeaching struct {
+	Name      string `json:"name"`
+	Year      int64  `json:"year"`
+	Mandatory bool   `json:"mandatory"`
 }
 
 type Degree struct {
-	Id    string `json:"id"`
-	Name  string `json:"name"`
-	Icon  string `json:"icon"`
-	Years []Year `json:"years"`
-	Chat  string `json:"chat"`
+	Id        string           `json:"id"`
+	Name      string           `json:"name"`
+	Icon      string           `json:"icon"`
+	Teachings []DegreeTeaching `json:"teachings"`
+	Years     []Year           `json:"years"`
+	Chat      string           `json:"chat"`
 }
 
 // timetables.json
@@ -178,4 +180,40 @@ func ParseRepresentatives(configPath string) (map[string]Representative, error) 
 	}
 
 	return representatives, nil
+}
+
+func GetAllMandatoryTeachingsFromDegree(d Degree) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if i.Mandatory {
+			dt = append(dt, i)
+		}
+	}
+	return
+}
+
+func GetAllElectivesTeachingsFromDegree(d Degree) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if !i.Mandatory {
+			dt = append(dt, i)
+		}
+	}
+	return
+}
+
+func GetYearMandatoryTeachingsFromDegree(d Degree, year int64) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if i.Mandatory && i.Year == year {
+			dt = append(dt, i)
+		}
+	}
+	return
+}
+
+func GetYearElectivesTeachingsFromDegree(d Degree, year int64) (dt []DegreeTeaching) {
+	for _, i := range d.Teachings {
+		if !i.Mandatory && i.Year == year {
+			dt = append(dt, i)
+		}
+	}
+	return
 }
