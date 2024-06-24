@@ -108,7 +108,7 @@ func ParseDegrees() (degrees []Degree, err error) {
 	return
 }
 
-func ParseTimetables(configPath string) (timetables map[string]Timetable, err error) {
+func ParseTimetables() (timetables map[string]Timetable, err error) {
 	file, err := cf.Open(timetablesFile)
 	defer file.Close()
 	if err != nil {
@@ -126,7 +126,7 @@ func ParseTimetables(configPath string) (timetables map[string]Timetable, err er
 	return
 }
 
-func ParseMaintainers(configPath string) (maintainer []Maintainer, err error) {
+func ParseMaintainers() (maintainer []Maintainer, err error) {
 	file, err := cf.ReadFile(maintainersFile)
 	if errors.Is(err, os.ErrNotExist) {
 		return maintainer, fmt.Errorf("%s does not exist", maintainersFile)
@@ -153,7 +153,7 @@ func ParseMaintainers(configPath string) (maintainer []Maintainer, err error) {
 	return nil, fmt.Errorf("couldn't found informabot projects after parsing %s", maintainersFile)
 }
 
-func ParseRepresentatives(configPath string) (map[string]Representative, error) {
+func ParseRepresentatives() (map[string]Representative, error) {
 	representatives := make(map[string]Representative)
 
 	byteValue, err := cf.ReadFile(representativesFile)
