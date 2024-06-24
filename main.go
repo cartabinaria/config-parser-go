@@ -158,7 +158,7 @@ func ParseRepresentatives() (map[string]Representative, error) {
 
 	byteValue, err := cf.ReadFile(representativesFile)
 	if errors.Is(err, os.ErrNotExist) {
-		return representatives, fmt.Errorf("%s does not exist", maintainersFile)
+		return representatives, fmt.Errorf("%s does not exist", representativesFile)
 	} else if err != nil {
 		return nil, fmt.Errorf("error reading %s file: %w", representativesFile, err)
 	}
