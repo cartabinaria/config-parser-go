@@ -9,17 +9,10 @@ jobs:
       - name: Setup go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.22.3
+          go-version: 1.22.4
 
       - name: Clone parser repo
         uses: actions/checkout@v4
-
-      - name: Clone config repo
-        uses: actions/checkout@v4
-        with:
-          repository: csunibo/config
-          ref: main
-          path: config
 
       - name: Run go tests
         run: go test -v ./...

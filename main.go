@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	cf "github.com/csunibo/config"
 	"os"
-	"path/filepath"
 )
 
 const (
@@ -83,24 +83,22 @@ type Representative struct {
 	Representatives []string `json:"representatives"`
 }
 
-func ParseTeachings(configPath string) (teachings []Teaching, err error) {
-	filepath := filepath.Join(configPath, teachingsFile)
-	file, err := os.Open(filepath)
+func ParseTeachings() (teachings []Teaching, err error) {
+	file, err := cf.Open(teachingsFile)
 	defer file.Close()
 	if err != nil {
-		return nil, fmt.Errorf("error reading %s file: %w", filepath, err)
+		return nil, fmt.Errorf("error reading %s file: %w", teachingsFile, err)
 	}
 
 	err = json.NewDecoder(file).Decode(&teachings)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing %s file: %w", filepath, err)
+		return nil, fmt.Errorf("error parsing %s file: %w", teachingsFile, err)
 	}
 	return
 }
 
-func ParseDegrees(configPath string) (degrees []Degree, err error) {
-	filepath := filepath.Join(configPath, degreesFile)
-	file, err := os.Open(filepath)
+func ParseDegrees() (degrees []Degree, err error) {
+	file, err := cf.Open(degreesFile)
 	defer file.Close()
 	if err != nil {
 		return nil, fmt.Errorf("error reading %s file: %w", degreesFile, err)
@@ -112,9 +110,8 @@ func ParseDegrees(configPath string) (degrees []Degree, err error) {
 	return
 }
 
-func ParseTimetables(configPath string) (timetables map[string]Timetable, err error) {
-	filepath := filepath.Join(configPath, timetablesFile)
-	file, err := os.Open(filepath)
+func ParseTimetables() (timetables map[string]Timetable, err error) {
+	file, err := cf.Open(timetablesFile)
 	defer file.Close()
 	if err != nil {
 		return nil, fmt.Errorf("error reading %s file: %w", timetablesFile, err)
@@ -124,16 +121,15 @@ func ParseTimetables(configPath string) (timetables map[string]Timetable, err er
 
 	err = json.NewDecoder(file).Decode(&mapData)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing %s file: %w", filepath, err)
+		return nil, fmt.Errorf("error parsing %s file: %w", timetablesFile, err)
 	}
 
 	timetables = mapData
 	return
 }
 
-func ParseMaintainers(configPath string) (maintainer []Maintainer, err error) {
-	filepath := filepath.Join(configPath, maintainersFile)
-	file, err := os.ReadFile(filepath)
+func ParseMaintainers() (maintainer []Maintainer, err error) {
+	file, err := cf.ReadFile(maintainersFile)
 	if errors.Is(err, os.ErrNotExist) {
 		return maintainer, fmt.Errorf("%s does not exist", maintainersFile)
 	} else if err != nil {
@@ -159,20 +155,19 @@ func ParseMaintainers(configPath string) (maintainer []Maintainer, err error) {
 	return nil, fmt.Errorf("couldn't found informabot projects after parsing %s", maintainersFile)
 }
 
-func ParseRepresentatives(configPath string) (map[string]Representative, error) {
+func ParseRepresentatives() (map[string]Representative, error) {
 	representatives := make(map[string]Representative)
 
-	filepath := filepath.Join(configPath, representativesFile)
-	byteValue, err := os.ReadFile(filepath)
+	byteValue, err := cf.ReadFile(representativesFile)
 	if errors.Is(err, os.ErrNotExist) {
-		return representatives, nil
+		return representatives, fmt.Errorf("%s does not exist", representativesFile)
 	} else if err != nil {
-		return nil, fmt.Errorf("error reading %s file: %w", filepath, err)
+		return nil, fmt.Errorf("error reading %s file: %w", representativesFile, err)
 	}
 
 	err = json.Unmarshal(byteValue, &representatives)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing %s file: %w", filepath, err)
+		return nil, fmt.Errorf("error parsing %s file: %w", representativesFile, err)
 	}
 
 	if representatives == nil {

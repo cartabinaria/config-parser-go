@@ -9,26 +9,26 @@ import (
 const configPath = "./config"
 
 func TestParseTeachings(t *testing.T) {
-	_, err := ParseTeachings(configPath)
+	_, err := ParseTeachings()
 	assert.Nil(t, err)
 }
 
 func TestParseDegrees(t *testing.T) {
-	_, err := ParseDegrees(configPath)
+	_, err := ParseDegrees()
 	assert.Nil(t, err)
 }
 
 func TestParseTimetables(t *testing.T) {
-	_, err := ParseTimetables(configPath)
+	_, err := ParseTimetables()
 	assert.Nil(t, err)
 }
 
 func TestParseMaintainers(t *testing.T) {
-	_, err := ParseMaintainers(configPath)
+	_, err := ParseMaintainers()
 	assert.Nil(t, err)
 }
 
 func TestParseRepresentatives(t *testing.T) {
-	_, err := ParseRepresentatives(configPath)
+	_, err := ParseRepresentatives()
 	assert.Nil(t, err)
 }
