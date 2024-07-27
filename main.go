@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	cf "github.com/csunibo/config"
 	"os"
+
+	cf "github.com/csunibo/config"
 )
 
 const (
@@ -211,4 +212,23 @@ func GetYearElectivesTeachingsFromDegree(d Degree, year int64) (dt []DegreeTeach
 		}
 	}
 	return
+}
+
+func GetYear(d Degree, year int64) (Year, error) {
+	for _, i := range d.Years {
+		if i.Year == year {
+			return i, nil
+		}
+	}
+	return Year{}, fmt.Errorf("Year not found")
+}
+
+// Same as GetYear, but panics if year is not found
+func MustGetYear(d Degree, year int64) Year {
+	for _, i := range d.Years {
+		if i.Year == year {
+			return i
+		}
+	}
+	panic("Year not found")
 }
