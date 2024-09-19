@@ -3,7 +3,7 @@ module github.com/csunibo/config-parser-go
 go 1.22.4
 
 require (
-	github.com/csunibo/config v0.1.8
+	github.com/csunibo/config v1.0.0
 	github.com/stretchr/testify v1.9.0
 )
 
