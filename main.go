@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	cf "github.com/csunibo/config"
+	cf "github.com/cartabinaria/config"
 )
 
 const (

@@ -1,9 +1,9 @@
-module github.com/csunibo/config-parser-go
+module github.com/cartabinaria/config-parser-go
 
 go 1.22.4
 
 require (
-	github.com/csunibo/config v1.0.0
+	github.com/cartabinaria/config v1.1.0
 	github.com/stretchr/testify v1.9.0
 )
 
