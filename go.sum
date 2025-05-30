@@ -2,6 +2,8 @@ github.com/cartabinaria/config v1.1.0 h1:U90Bd1buX688D3BM3lr8YK1sHcZf+o09odijo1b
 github.com/cartabinaria/config v1.1.0/go.mod h1:75k1qUVzdgzvNXziOTJdtAL8c6Q8OXPa28LYol0dmOw=
 github.com/cartabinaria/config v1.1.1 h1:NPJEVzjATnOdPAR1mz1xeCAUHBbpkmMrWyaNGVELbPE=
 github.com/cartabinaria/config v1.1.1/go.mod h1:75k1qUVzdgzvNXziOTJdtAL8c6Q8OXPa28LYol0dmOw=
+github.com/cartabinaria/config v1.1.2 h1:yQaOpWTdQtgqbssMelLKgDWJMwJmnRsW/Gyx4dDcQlc=
+github.com/cartabinaria/config v1.1.2/go.mod h1:75k1qUVzdgzvNXziOTJdtAL8c6Q8OXPa28LYol0dmOw=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
