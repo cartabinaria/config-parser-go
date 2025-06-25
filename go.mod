@@ -3,7 +3,7 @@ module github.com/cartabinaria/config-parser-go
 go 1.22.4
 
 require (
-	github.com/cartabinaria/config v1.1.2
+	github.com/cartabinaria/config v1.1.3
 	github.com/stretchr/testify v1.9.0
 )
 
